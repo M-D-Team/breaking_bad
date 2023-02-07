@@ -13,6 +13,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BreakBadItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BREAKBAD.MOD_ID);
 
+    // gives the player an effect
     public static final RegistryObject<Item> METH = ITEMS.register("meth",() -> new Item(new Item.Properties().tab(BreakBadItemGroup.BREAKING_BAD_TAB).food(new Food.Builder().effect(new EffectInstance(Effects.MOVEMENT_SPEED,4000,1),1f).build())));
 
     public static void register(IEventBus eventBus) {ITEMS.register(eventBus);}
