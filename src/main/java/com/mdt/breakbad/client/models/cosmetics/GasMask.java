@@ -9,31 +9,39 @@ import net.minecraft.client.renderer.entity.model.EntityModel;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-
 public class GasMask extends EntityModel<Entity> {
-	private final ModelRenderer mask;
+	private final ModelRenderer bb_main;
+	private final ModelRenderer cube_r1;
+	private final ModelRenderer cube_r2;
+	private final ModelRenderer cube_r3;
 
 	public GasMask() {
-		int textureWidth = 64;
-		int textureHeight = 64;
+		texWidth = 64;
+		texHeight = 64;
 
-		mask = new ModelRenderer(this);
-		mask.setPos(0.0F, 24.0F, 0.0F);
-		mask.texOffs(22, 23).addBox(-4.0F, -28.0F, -6.0F, 8.0F, 4.0F, 2.0F, 0.0F, false);
-		mask.texOffs(0, 24).addBox(-3.0F, -32.0F, -6.0F, 6.0F, 1.0F, 2.0F, 0.0F, false);
-		mask.texOffs(0, 12).addBox(-4.0F, -32.0F, -6.0F, 1.0F, 4.0F, 2.0F, 0.0F, false);
-		mask.texOffs(6, 12).addBox(-4.0F, -33.0F, 4.0F, 1.0F, 6.0F, 1.0F, 0.0F, false);
-		mask.texOffs(6, 4).addBox(3.0F, -33.0F, 4.0F, 1.0F, 6.0F, 1.0F, 0.0F, false);
-		mask.texOffs(13, 12).addBox(-4.0F, -33.0F, -6.0F, 1.0F, 1.0F, 10.0F, 0.0F, false);
-		mask.texOffs(0, 0).addBox(4.0F, -28.0F, -6.0F, 1.0F, 1.0F, 11.0F, 0.0F, false);
-		mask.texOffs(0, 12).addBox(-5.0F, -28.0F, -6.0F, 1.0F, 1.0F, 11.0F, 0.0F, false);
-		mask.texOffs(13, 0).addBox(3.0F, -33.0F, -6.0F, 1.0F, 1.0F, 10.0F, 0.0F, false);
-		mask.texOffs(0, 4).addBox(3.0F, -32.0F, -6.0F, 1.0F, 4.0F, 2.0F, 0.0F, false);
-		mask.texOffs(0, 0).addBox(-1.0F, -27.0F, -8.0F, 2.0F, 2.0F, 2.0F, 0.0F, false);
-		mask.texOffs(13, 3).addBox(-1.0F, -28.0F, -8.0F, 2.0F, 1.0F, 2.0F, 0.0F, false);
-		mask.texOffs(13, 0).addBox(-1.0F, -25.0F, -8.0F, 2.0F, 1.0F, 2.0F, 0.0F, false);
-		mask.texOffs(13, 12).addBox(-2.0F, -27.0F, -8.0F, 1.0F, 2.0F, 2.0F, 0.0F, false);
-		mask.texOffs(13, 6).addBox(1.0F, -27.0F, -8.0F, 1.0F, 2.0F, 2.0F, 0.0F, false);
+		bb_main = new ModelRenderer(this);
+		bb_main.setPos(0.0F, 24.0F, 0.0F);
+		
+
+		cube_r1 = new ModelRenderer(this);
+		cube_r1.setPos(0.0F, -24.0F, 0.0F);
+		bb_main.addChild(cube_r1);
+		setRotationAngle(cube_r1, 0.7418F, 0.829F, 0.0F);
+		cube_r1.texOffs(23, 22).addBox(5.5F, -1.5F, -1.5F, 2.0F, 3.0F, 4.0F, 0.0F, false);
+
+		cube_r2 = new ModelRenderer(this);
+		cube_r2.setPos(0.0F, -24.0F, 0.0F);
+		bb_main.addChild(cube_r2);
+		setRotationAngle(cube_r2, 2.3998F, 0.829F, 3.1416F);
+		cube_r2.texOffs(25, 0).addBox(5.5F, -1.5F, -2.5F, 2.0F, 3.0F, 4.0F, 0.0F, false);
+
+		cube_r3 = new ModelRenderer(this);
+		cube_r3.setPos(0.0F, -24.0F, 0.0F);
+		bb_main.addChild(cube_r3);
+		setRotationAngle(cube_r3, 0.0F, 1.5708F, 0.0F);
+		cube_r3.texOffs(14, 17).addBox(4.5F, -2.0F, -2.0F, 2.0F, 3.0F, 4.0F, 0.0F, false);
+		cube_r3.texOffs(0, 0).addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.01F, false);
+		cube_r3.texOffs(0, 17).addBox(2.5F, -8.5F, -4.5F, 2.0F, 9.0F, 9.0F, 0.0F, false);
 	}
 
 	@Override
@@ -42,15 +50,14 @@ public class GasMask extends EntityModel<Entity> {
 	}
 
 
+	@Override
+	public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+		bb_main.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
 
 	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
 		modelRenderer.xRot = x;
 		modelRenderer.yRot = y;
 		modelRenderer.zRot = z;
-	}
-
-	@Override
-	public void renderToBuffer(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		mask.render(matrixStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 }

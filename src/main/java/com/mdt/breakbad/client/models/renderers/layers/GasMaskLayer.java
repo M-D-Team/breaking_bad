@@ -3,7 +3,6 @@ package com.mdt.breakbad.client.models.renderers.layers;
 import com.mdt.breakbad.BREAKBAD;
 import com.mdt.breakbad.client.models.cosmetics.GasMask;
 import com.mdt.breakbad.common.items.GasMaskArmourItem;
-import com.mdt.breakbad.core.init.BreakBadItems;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -15,7 +14,6 @@ import net.minecraft.client.renderer.entity.model.PlayerModel;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 

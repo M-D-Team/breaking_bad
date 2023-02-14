@@ -1,81 +1,22 @@
 {
-	"credit": "Made by Mzsty",
-	"texture_size": [128, 128],
-	"textures": {
-		"0": "breakbad:block/barrel",
-		"particle": "breakbad:block/barrel"
-	},
-	"elements": [
-		{
-			"from": [0, 1, 0],
-			"to": [16, 24, 16],
-			"faces": {
-				"north": {"uv": [0, 0, 2, 2.875], "texture": "#0"},
-				"east": {"uv": [2, 0, 4, 2.875], "texture": "#0"},
-				"south": {"uv": [0, 2.875, 2, 5.75], "texture": "#0"},
-				"west": {"uv": [2, 2.875, 4, 5.75], "texture": "#0"},
-				"up": {"uv": [8.25, 2, 6.25, 0], "texture": "#0"},
-				"down": {"uv": [8.25, 2, 6.25, 4], "texture": "#0"}
-			}
-		},
-		{
-			"from": [-1, 23, -1],
-			"to": [17, 26.7, 16.9],
-			"faces": {
-				"north": {"uv": [6.25, 4, 8.5, 4.5], "texture": "#0"},
-				"east": {"uv": [6.25, 4.5, 8.5, 5], "texture": "#0"},
-				"south": {"uv": [6.25, 5, 8.5, 5.5], "texture": "#0"},
-				"west": {"uv": [6.25, 5.5, 8.5, 6], "texture": "#0"},
-				"up": {"uv": [6.25, 2.25, 4, 0], "texture": "#0"},
-				"down": {"uv": [6.25, 2.25, 4, 4.5], "texture": "#0"}
-			}
-		},
-		{
-			"from": [-1, 0, -1],
-			"to": [17, 3.7, 16.9],
-			"faces": {
-				"north": {"uv": [6.25, 6, 8.5, 6.5], "texture": "#0"},
-				"east": {"uv": [6.25, 6.5, 8.5, 7], "texture": "#0"},
-				"south": {"uv": [2.25, 6.75, 4.5, 7.25], "texture": "#0"},
-				"west": {"uv": [4.5, 7, 6.75, 7.5], "texture": "#0"},
-				"up": {"uv": [6.25, 6.75, 4, 4.5], "texture": "#0"},
-				"down": {"uv": [2.25, 5.75, 0, 8], "texture": "#0"}
-			}
-		}
-	],
-	"display": {
-		"thirdperson_righthand": {
-			"scale": [0.43164, 0.43164, 0.43164]
-		},
-		"thirdperson_lefthand": {
-			"scale": [0.43945, 0.43945, 0.43945]
-		},
-		"firstperson_righthand": {
-			"scale": [0.50586, 0.50586, 0.50586]
-		},
-		"firstperson_lefthand": {
-			"scale": [0.4375, 0.4375, 0.4375]
-		},
-		"ground": {
-			"translation": [0, 5.5, 0],
-			"scale": [0.88281, 0.88281, 0.88281]
-		},
-		"gui": {
-			"rotation": [-180, 33.5, -180],
-			"translation": [0.25, -2.5, 0],
-			"scale": [0.57422, 0.57422, 0.57422]
-		},
-		"fixed": {
-			"translation": [0, -2.75, 0],
-			"scale": [0.60156, 0.60156, 0.60156]
-		}
-	},
-	"groups": [
-		{
-			"name": "VoxelShapes",
-			"origin": [8, 8, 8],
-			"color": 0,
-			"children": [0, 1, 2]
-		}
-	]
+  "credit": "Made by Duzo",
+  "parent" : "block/cube_all",
+  "textures": {
+    "0": "breakbad:block/barrel",
+    "1": "breakbad:block/barrel_top",
+    "particle": "breakbad:block/barrel_top"
+  },
+  "elements": [
+    {   "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#1", "cullface": "down" },
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#1",    "cullface": "up"},
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#0",   "cullface": "north" },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#0",   "cullface": "south" },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#0",   "cullface": "west" },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#0",   "cullface": "east" }
+      }
+    }
+  ]
 }
