@@ -1,5 +1,7 @@
 {
   "variants": {
-    "": {"model": "breakbad:block/barrel"}
+    "" : {
+      "model": "breakbad:block/barrel"
+    }
   }
 }

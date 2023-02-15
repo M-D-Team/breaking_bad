@@ -1,5 +1,5 @@
 {
-  "itemGroup.breaking_bad_tab": "Breaking Bad",
-  "item.breakbad.meth": "Bag of Meth",
-  "item.breakbad.gas_mask": "Gas Mask"
+  "tabs.breakbad.breakbad_tab": "Breaking Bad Mod",
+  "item.breakbad.meth": "Bag of Product",
+  "block.breakbad.barrel": "Barrel"
 }
