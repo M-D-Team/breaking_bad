@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "breakbad:pollos",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1821890134,
+    "spacing": 20,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}

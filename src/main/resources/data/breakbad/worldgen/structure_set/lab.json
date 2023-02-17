@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "breakbad:lab",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 1329789342,
+    "spacing": 20,
+    "separation": 6,
+    "type": "minecraft:random_spread"
+  }
+}
