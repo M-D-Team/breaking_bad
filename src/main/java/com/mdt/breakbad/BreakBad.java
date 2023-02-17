@@ -64,6 +64,7 @@ public class BreakBad
                 .displayItems((featureFlags, output, hasOp) -> {
                     output.accept(BreakBadItems.METH.get());
                     output.accept(BreakBadBlocks.BARREL.get().asItem());
+                    output.accept(BreakBadItems.FULMINATE.get());
                 })
         );
     }
