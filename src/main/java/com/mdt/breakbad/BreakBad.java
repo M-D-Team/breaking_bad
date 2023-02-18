@@ -1,6 +1,7 @@
 package com.mdt.breakbad;
 
 import com.mdt.breakbad.core.init.BreakBadBlocks;
+import com.mdt.breakbad.core.init.BreakBadEntities;
 import com.mdt.breakbad.core.init.BreakBadItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -46,6 +47,7 @@ public class BreakBad
 
         BreakBadItems.ITEMS.register(modEventBus);
         BreakBadBlocks.BLOCKS.register(modEventBus);
+        BreakBadEntities.ENTITIES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

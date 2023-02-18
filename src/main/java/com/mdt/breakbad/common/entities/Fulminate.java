@@ -17,21 +17,28 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
 public class Fulminate extends ThrowableItemProjectile {
-    public int explosionRadius = 3;
-    public Fulminate(EntityType<? extends Fulminate> type, Level level) {
-        super(type, level);
+
+    private int explosionRadius = 3;
+
+    public Fulminate(EntityType<? extends Fulminate> entityType, Level level) {
+        super(entityType, level);
     }
 
     public Fulminate(Level level, LivingEntity entity) {
-        super(BreakBadEntities.FULMINATE_ENTITY.get(), entity, level);
+        super(BreakBadEntities.FULMINATE.get(), entity, level);
     }
 
     public Fulminate(Level level, double xPos, double yPos, double zPos) {
-        super(BreakBadEntities.FULMINATE_ENTITY.get(), xPos, yPos, zPos, level);
+        super(BreakBadEntities.FULMINATE.get(), xPos, yPos, zPos, level);
     }
 
     protected Item getDefaultItem() {
         return BreakBadItems.FULMINATE.get();
+    }
+
+    @Override
+    public boolean shouldRender(double p_20296_, double p_20297_, double p_20298_) {
+        return super.shouldRender(p_20296_, p_20297_, p_20298_);
     }
 
     private ParticleOptions getParticle() {
@@ -55,6 +62,7 @@ public class Fulminate extends ThrowableItemProjectile {
             this.level.explode(null, entity.getX(), entity.getY(),entity.getZ(),entity.explosionRadius,Level.ExplosionInteraction.MOB);
         }
     }
+
     protected void onHitEntity(EntityHitResult hitResult) {
         super.onHitEntity(hitResult);
         Entity entity = hitResult.getEntity();
