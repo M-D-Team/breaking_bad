@@ -2,9 +2,11 @@ package com.mdt.breakbad.client.models.renderers.layers;
 
 import com.mdt.breakbad.BreakBad;
 import com.mdt.breakbad.client.models.cosmetics.GasMaskModel;
+import com.mdt.breakbad.core.init.BreakBadItems;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexBuffer;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.PlayerModel;
@@ -22,7 +24,7 @@ import net.minecraft.world.item.ItemStack;
 public class GasMaskLayer<T extends LivingEntity, M extends EntityModel<T> & HeadedModel> extends RenderLayer<T, M> {
     public static final ResourceLocation GAS_MASK_LOCATION = new ResourceLocation(BreakBad.MODID, "textures/cosmetics/gas_mask.png");
 
-    private static final GasMaskModel gasMask = new GasMaskModel();
+    private static final GasMaskModel gasMask = new GasMaskModel(Minecraft.getInstance().getEntityModels().bakeLayer(GasMaskModel.LAYER_LOCATION));
 
     public GasMaskLayer(RenderLayerParent<T, M> p_117346_) {
         super(p_117346_);
@@ -38,7 +40,7 @@ public class GasMaskLayer<T extends LivingEntity, M extends EntityModel<T> & Hea
     public void render(PoseStack pMatrixStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTicks, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         pMatrixStack.pushPose();
         ItemStack gasItem = pLivingEntity.getItemBySlot(EquipmentSlot.HEAD);
-        if (gasItem.getItem() instanceof GasMaskArmourItem) {
+        if (gasItem.getItem() == gasItem.getItem()) {
             if (getParentModel() instanceof PlayerModel) {
                 PlayerModel model = (PlayerModel) getParentModel();
                 model.hat.visible = true;
