@@ -20,7 +20,7 @@ public class BreakBadPotions {
     public static final RegistryObject<Potion> CRYSTLAMINE_POTION = POTIONS.register("crystlamine_potion",
             () -> new Potion(new MobEffectInstance(MobEffects.GLOWING, 200, 0)));
     public static final RegistryObject<Potion> SEAWEED_EXTRACT = POTIONS.register("seaweed_extract",
-            () -> new Potion(new MobEffectInstance(MobEffects.WATER_BREATHING, 200, 0)));
+            () -> new Potion(new MobEffectInstance(MobEffects.JUMP, 200, 0)));
 
 
     public static void register(IEventBus eventBus) {

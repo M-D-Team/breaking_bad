@@ -1,9 +1,6 @@
 package com.mdt.breakbad;
 
-import com.mdt.breakbad.core.init.BreakBadBlocks;
-import com.mdt.breakbad.core.init.BreakBadEntities;
-import com.mdt.breakbad.core.init.BreakBadItems;
-import com.mdt.breakbad.core.init.BreakBadPotions;
+import com.mdt.breakbad.core.init.*;
 import com.mdt.breakbad.util.BetterBrewingRecipe;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -48,6 +45,7 @@ public class BreakBad
         BreakBadBlocks.BLOCKS.register(modEventBus);
         BreakBadEntities.ENTITIES.register(modEventBus);
         BreakBadPotions.POTIONS.register(modEventBus);
+        BreakBadRecipes.SERIALIZERS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
