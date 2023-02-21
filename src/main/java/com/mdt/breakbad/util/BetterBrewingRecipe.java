@@ -36,7 +36,6 @@ public class BetterBrewingRecipe implements IBrewingRecipe {
         if(!this.isInput(input) || !this.isIngredient(ingredient)) {
             return ItemStack.EMPTY;
         }
-
         ItemStack itemStack = new ItemStack(input.getItem());
         itemStack.setTag(new CompoundTag());
         PotionUtils.setPotion(itemStack, this.output);

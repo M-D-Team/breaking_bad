@@ -1,16 +1,13 @@
 package com.mdt.breakbad.client.models.renderers.layers;
 
 import com.mdt.breakbad.BreakBad;
-import com.mdt.breakbad.client.models.cosmetics.GasMaskModel;
-import com.mdt.breakbad.core.init.BreakBadItems;
+import com.mdt.breakbad.client.models.GasMaskModel;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexBuffer;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HeadedModel;
 import net.minecraft.client.model.PlayerModel;
-import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
@@ -23,13 +20,12 @@ import net.minecraft.world.item.ItemStack;
 
 public class GasMaskLayer<T extends LivingEntity, M extends EntityModel<T> & HeadedModel> extends RenderLayer<T, M> {
     public static final ResourceLocation GAS_MASK_LOCATION = new ResourceLocation(BreakBad.MODID, "textures/cosmetics/gas_mask.png");
+    public GasMaskModel<T> gasMaskModel;
 
-    private static final GasMaskModel gasMask = new GasMaskModel(Minecraft.getInstance().getEntityModels().bakeLayer(GasMaskModel.LAYER_LOCATION));
-
-    public GasMaskLayer(RenderLayerParent<T, M> p_117346_) {
+    public GasMaskLayer(RenderLayerParent<T, M> p_117346_, EntityModelSet entityModels) {
         super(p_117346_);
+        this.gasMaskModel = new GasMaskModel<T>(entityModels.bakeLayer(GasMaskModel.LAYER_LOCATION));
     }
-
 
     @Override
     public ResourceLocation getTextureLocation(T entity) {
@@ -43,14 +39,14 @@ public class GasMaskLayer<T extends LivingEntity, M extends EntityModel<T> & Hea
         if (gasItem.getItem() == gasItem.getItem()) {
             if (getParentModel() instanceof PlayerModel) {
                 PlayerModel model = (PlayerModel) getParentModel();
-                model.hat.visible = true;
-                model.head.visible = true;
-                model.head.translateAndRotate(pMatrixStack);
                 model.hat.visible = false;
                 model.head.visible = false;
+                model.head.translateAndRotate(pMatrixStack);
+                model.hat.visible = true;
+                model.head.visible = true;
             }
             VertexConsumer vertexBuffer = pBuffer.getBuffer(RenderType.entityTranslucent(GAS_MASK_LOCATION));
-            this.gasMask.renderToBuffer(pMatrixStack, vertexBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1.0F);
+            this.gasMaskModel.renderToBuffer(pMatrixStack, vertexBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 1, 1, 1, 1.0F);
         }
         pMatrixStack.popPose();
     }

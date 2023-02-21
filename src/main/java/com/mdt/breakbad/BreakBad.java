@@ -1,17 +1,27 @@
 package com.mdt.breakbad;
 
-import com.mdt.breakbad.core.init.*;
+import com.mdt.breakbad.client.models.BreakBadModels;
+import com.mdt.breakbad.client.models.renderers.layers.GasMaskLayer;
+import com.mdt.breakbad.core.init.BreakBadBlocks;
+import com.mdt.breakbad.core.init.BreakBadEntities;
+import com.mdt.breakbad.core.init.BreakBadItems;
+import com.mdt.breakbad.core.init.BreakBadPotions;
 import com.mdt.breakbad.util.BetterBrewingRecipe;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -45,7 +55,6 @@ public class BreakBad
         BreakBadBlocks.BLOCKS.register(modEventBus);
         BreakBadEntities.ENTITIES.register(modEventBus);
         BreakBadPotions.POTIONS.register(modEventBus);
-        BreakBadRecipes.SERIALIZERS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -101,5 +110,17 @@ public class BreakBad
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
+        @SubscribeEvent
+        public void addRenderLayer(EntityRenderersEvent.AddLayers event) {
+            LivingEntityRenderer<Player, PlayerModel<Player>> renderer = event.getRenderer(EntityType.PLAYER);
+            GasMaskLayer<Player, PlayerModel<Player>> layer = new GasMaskLayer<>(renderer, event.getEntityModels());
+            assert renderer != null;
+            renderer.addLayer(layer);
+        }
+        @SubscribeEvent
+        public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
+            BreakBadModels.addModels(event);
+        }
+
     }
 }
