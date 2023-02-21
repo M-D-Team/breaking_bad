@@ -3,17 +3,19 @@ package com.mdt.breakbad;
 import com.mdt.breakbad.core.init.BreakBadBlocks;
 import com.mdt.breakbad.core.init.BreakBadEntities;
 import com.mdt.breakbad.core.init.BreakBadItems;
+import com.mdt.breakbad.core.init.BreakBadPotions;
+import com.mdt.breakbad.util.BetterBrewingRecipe;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -22,10 +24,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegisterEvent;
-import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -57,24 +55,24 @@ public class BreakBad
     }
 
 
-
     private void registerTabs(CreativeModeTabEvent.Register event)
     {
         BREAKBAD_TAB = event.registerCreativeModeTab(new ResourceLocation(MODID, "breakbad_tab"), builder -> builder
                 .icon(() -> new ItemStack(BreakBadItems.METH.get()))
                 .title(Component.translatable("tabs.breakbad.breakbad_tab"))
                 .displayItems((featureFlags, output, hasOp) -> {
-                    output.accept(BreakBadItems.METH.get());
+                    // Make sure to order these alphabetically as the order they are registered here is the order they appear in game.
+                    output.accept(BreakBadItems.AMETHYST_DUST.get());
                     output.accept(BreakBadBlocks.BARREL.get().asItem());
                     output.accept(BreakBadItems.FULMINATE.get());
+                    output.accept(BreakBadItems.METH.get());
                 })
         );
     }
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-        LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
+    private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD,BreakBadItems.AMETHYST_DUST.get(), BreakBadPotions.CRYSTLAMINE_POTION.get()));
+        });
     }
 
 
