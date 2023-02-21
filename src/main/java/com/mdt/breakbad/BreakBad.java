@@ -1,7 +1,5 @@
 package com.mdt.breakbad;
 
-import com.mdt.breakbad.client.models.BreakBadModels;
-import com.mdt.breakbad.client.models.renderers.layers.GasMaskLayer;
 import com.mdt.breakbad.core.init.BreakBadBlocks;
 import com.mdt.breakbad.core.init.BreakBadEntities;
 import com.mdt.breakbad.core.init.BreakBadItems;
@@ -9,19 +7,16 @@ import com.mdt.breakbad.core.init.BreakBadPotions;
 import com.mdt.breakbad.util.BetterBrewingRecipe;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.PlayerModel;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -82,6 +77,8 @@ public class BreakBad
         event.enqueueWork(() -> {
             BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD,BreakBadItems.AMETHYST_DUST.get(), BreakBadPotions.CRYSTLAMINE_POTION.get()));
             BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD, Items.KELP, BreakBadPotions.SEAWEED_EXTRACT.get()));
+            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadPotions.SEAWEED_EXTRACT.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.CRYSTLAMINE_POTION.get()).getItem(),BreakBadPotions.PURE_COMPOUND.get()));
+            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadPotions.CRYSTLAMINE_POTION.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.SEAWEED_EXTRACT.get()).getItem(),BreakBadPotions.PURE_COMPOUND.get()));
         });
     }
 
@@ -110,17 +107,5 @@ public class BreakBad
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
         }
-        @SubscribeEvent
-        public void addRenderLayer(EntityRenderersEvent.AddLayers event) {
-            LivingEntityRenderer<Player, PlayerModel<Player>> renderer = event.getRenderer(EntityType.PLAYER);
-            GasMaskLayer<Player, PlayerModel<Player>> layer = new GasMaskLayer<>(renderer, event.getEntityModels());
-            assert renderer != null;
-            renderer.addLayer(layer);
-        }
-        @SubscribeEvent
-        public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event) {
-            BreakBadModels.addModels(event);
-        }
-
     }
 }

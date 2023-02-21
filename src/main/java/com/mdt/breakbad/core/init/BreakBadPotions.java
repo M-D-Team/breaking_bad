@@ -18,6 +18,8 @@ import static com.mdt.breakbad.BreakBad.MODID;
 public class BreakBadPotions {
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, MODID);
     public static final RegistryObject<Potion> CRYSTLAMINE_POTION = POTIONS.register("crystlamine_potion",
+            () -> new Potion(new MobEffectInstance(MobEffects.REGENERATION, 200, 0)));
+    public static final RegistryObject<Potion> PURE_COMPOUND = POTIONS.register("pure_compound",
             () -> new Potion(new MobEffectInstance(MobEffects.GLOWING, 200, 0)));
     public static final RegistryObject<Potion> SEAWEED_EXTRACT = POTIONS.register("seaweed_extract",
             () -> new Potion(new MobEffectInstance(MobEffects.JUMP, 200, 0)));
