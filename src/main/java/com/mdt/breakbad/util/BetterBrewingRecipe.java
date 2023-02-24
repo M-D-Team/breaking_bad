@@ -13,12 +13,21 @@ import net.minecraftforge.event.entity.living.PotionColorCalculationEvent;
 public class BetterBrewingRecipe implements IBrewingRecipe {
     private final Potion input;
     private final Item ingredient;
-    private final Potion output;
+    private final Object output;
+    private boolean outputIsValid;
 
-    public BetterBrewingRecipe(Potion input, Item ingredient, Potion output) {
+    public BetterBrewingRecipe(Potion input, Item ingredient,Object output) {
         this.input = input;
         this.ingredient = ingredient;
         this.output = output;
+        // Because i want to be able to output Items AND Potions, im making this allow any object and then checking to see if its valid for Items or Potions.
+        if (this.output instanceof Item) {
+            this.outputIsValid = true;
+        } else if (this.output instanceof Potion) {
+            this.outputIsValid = true;
+        } else {
+            this.outputIsValid = false;
+        }
     }
 
     @Override
@@ -36,9 +45,18 @@ public class BetterBrewingRecipe implements IBrewingRecipe {
         if(!this.isInput(input) || !this.isIngredient(ingredient)) {
             return ItemStack.EMPTY;
         }
-        ItemStack itemStack = new ItemStack(input.getItem());
-        itemStack.setTag(new CompoundTag());
-        PotionUtils.setPotion(itemStack, this.output);
-        return itemStack;
+        if (!this.outputIsValid) {
+            return ItemStack.EMPTY;
+        }
+        if (this.output instanceof Potion) {
+            ItemStack itemStack = new ItemStack(input.getItem());
+            itemStack.setTag(new CompoundTag());
+            PotionUtils.setPotion(itemStack, (Potion) this.output);
+            return itemStack;
+        } else if (this.output instanceof Item) {
+            ItemStack itemStack = new ItemStack(((Item) this.output).asItem());
+            return itemStack;
+        }
+        return null;
     }
 }

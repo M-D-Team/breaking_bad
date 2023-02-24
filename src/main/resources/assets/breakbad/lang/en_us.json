@@ -3,9 +3,13 @@
   "item.breakbad.meth": "Bag of Product",
   "item.breakbad.amethyst_dust": "Amethyst Dust",
   "item.breakbad.fulminate": "Fulminate",
+  "item.breakbad.flavouring_extract": "Flavouring Extract",
   "item.minecraft.potion.effect.crystlamine_potion": "Crystlamine",
   "item.minecraft.potion.effect.seaweed_extract": "Seaweed Extract",
   "item.minecraft.potion.effect.pure_compound": "Pure Compound",
   "item.breakbad.breaking_bread": "BREaAKING BREAD ?!?!??!",
-  "block.breakbad.barrel": "Barrel"
+  "block.breakbad.barrel": "Barrel",
+  "effect.breakbad.crystlamine": "A needed ingredient in the making of Product to create that signature crystal.",
+  "effect.breakbad.seaweed": "Give it that little more blue.",
+  "effect.breakbad.pure_compound": "The purest of potions."
 }

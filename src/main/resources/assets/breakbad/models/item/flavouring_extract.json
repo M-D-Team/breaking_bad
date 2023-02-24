@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "breakbad:item/crystlamine_potion"
+    "layer0": "breakbad:item/flavouring_extract"
   }
 }

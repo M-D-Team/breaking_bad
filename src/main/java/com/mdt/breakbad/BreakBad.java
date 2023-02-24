@@ -1,9 +1,6 @@
 package com.mdt.breakbad;
 
-import com.mdt.breakbad.core.init.BreakBadBlocks;
-import com.mdt.breakbad.core.init.BreakBadEntities;
-import com.mdt.breakbad.core.init.BreakBadItems;
-import com.mdt.breakbad.core.init.BreakBadPotions;
+import com.mdt.breakbad.core.init.*;
 import com.mdt.breakbad.util.BetterBrewingRecipe;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -49,6 +46,7 @@ public class BreakBad
         BreakBadItems.ITEMS.register(modEventBus);
         BreakBadBlocks.BLOCKS.register(modEventBus);
         BreakBadEntities.ENTITIES.register(modEventBus);
+        BreakBadEffects.MOB_EFFECTS.register(modEventBus);
         BreakBadPotions.POTIONS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
@@ -69,6 +67,7 @@ public class BreakBad
                     output.accept(BreakBadItems.AMETHYST_DUST.get());
                     output.accept(BreakBadBlocks.BARREL.get().asItem());
                     output.accept(BreakBadItems.FULMINATE.get());
+                    output.accept(BreakBadItems.FLAVOURING_EXTRACT.get());
                     output.accept(BreakBadItems.METH.get());
                 })
         );
@@ -79,6 +78,7 @@ public class BreakBad
             BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD, Items.KELP, BreakBadPotions.SEAWEED_EXTRACT.get()));
             BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadPotions.SEAWEED_EXTRACT.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.CRYSTLAMINE_POTION.get()).getItem(),BreakBadPotions.PURE_COMPOUND.get()));
             BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadPotions.CRYSTLAMINE_POTION.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.SEAWEED_EXTRACT.get()).getItem(),BreakBadPotions.PURE_COMPOUND.get()));
+            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadPotions.PURE_COMPOUND.get(), BreakBadItems.FLAVOURING_EXTRACT.get(),BreakBadItems.METH.get()));
         });
     }
 
