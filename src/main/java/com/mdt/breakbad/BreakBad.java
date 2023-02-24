@@ -66,19 +66,22 @@ public class BreakBad
                     // Make sure to order these alphabetically as the order they are registered here is the order they appear in game.
                     output.accept(BreakBadItems.AMETHYST_DUST.get());
                     output.accept(BreakBadBlocks.BARREL.get().asItem());
+                    output.accept(BreakBadItems.CRYSTLAMINE.get());
                     output.accept(BreakBadItems.FULMINATE.get());
                     output.accept(BreakBadItems.FLAVOURING_EXTRACT.get());
                     output.accept(BreakBadItems.METH.get());
+                    output.accept(BreakBadItems.PURE_COMPOUND.get());
+                    output.accept(BreakBadItems.SEAWEED_EXTRACT.get());
                 })
         );
     }
     private void commonSetup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD,BreakBadItems.AMETHYST_DUST.get(), BreakBadPotions.CRYSTLAMINE_POTION.get()));
-            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD, Items.KELP, BreakBadPotions.SEAWEED_EXTRACT.get()));
-            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadPotions.SEAWEED_EXTRACT.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.CRYSTLAMINE_POTION.get()).getItem(),BreakBadPotions.PURE_COMPOUND.get()));
-            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadPotions.CRYSTLAMINE_POTION.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.SEAWEED_EXTRACT.get()).getItem(),BreakBadPotions.PURE_COMPOUND.get()));
-            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadPotions.PURE_COMPOUND.get(), BreakBadItems.FLAVOURING_EXTRACT.get(),BreakBadItems.METH.get()));
+            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD,BreakBadItems.AMETHYST_DUST.get(), BreakBadItems.CRYSTLAMINE.get()));
+            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(Potions.AWKWARD, Items.KELP, BreakBadItems.SEAWEED_EXTRACT.get()));
+            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadItems.SEAWEED_EXTRACT.get(), BreakBadItems.CRYSTLAMINE.get(),BreakBadItems.PURE_COMPOUND.get()));
+            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadItems.CRYSTLAMINE.get(), BreakBadItems.SEAWEED_EXTRACT.get(),BreakBadItems.PURE_COMPOUND.get()));
+            BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadItems.PURE_COMPOUND.get(), BreakBadItems.FLAVOURING_EXTRACT.get(),BreakBadItems.METH.get()));
         });
     }
 
