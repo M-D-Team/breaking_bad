@@ -63,12 +63,14 @@ public class BreakBad
                 .icon(() -> new ItemStack(BreakBadItems.METH.get()))
                 .title(Component.translatable("tabs.breakbad.breakbad_tab"))
                 .displayItems((featureFlags, output, hasOp) -> {
-                    // Make sure to order these alphabetically as the order they are registered here is the order they appear in game.
-                    output.accept(BreakBadItems.AMETHYST_DUST.get());
-                    output.accept(BreakBadBlocks.BARREL.get().asItem());
+                    // Try and group them together.
+                    output.accept(PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.CRYSTLAMINE_POTION.get()));
+                    output.accept(PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.PURE_COMPOUND.get()));
+                    output.accept(PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.SEAWEED_EXTRACT.get()));
                     output.accept(BreakBadItems.FULMINATE.get());
-                    output.accept(BreakBadItems.FLAVOURING_EXTRACT.get());
                     output.accept(BreakBadItems.METH.get());
+                    output.accept(BreakBadItems.FLAVOURING_EXTRACT.get());
+                    output.accept(BreakBadItems.AMETHYST_DUST.get());
                 })
         );
     }
