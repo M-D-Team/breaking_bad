@@ -60,3 +60,6 @@ TNT + Bag of Product in Crafting Table:
 
 ### Barrel
 **NO RECIPE AS OF CURRENT**
+
+## Structures
+**All the structures are currently found in "desert" type biomes, and the spawnrate is VERY high (like, too high)**
