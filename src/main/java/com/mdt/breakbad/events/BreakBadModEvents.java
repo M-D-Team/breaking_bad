@@ -18,5 +18,10 @@ public class BreakBadModEvents {
     @SubscribeEvent
     public static void entityAttributes(EntityAttributeCreationEvent event) {
         event.put(BreakBadEntities.HUMANOID_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
+        event.put(BreakBadEntities.GUS_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
+        event.put(BreakBadEntities.JESSE_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
+        event.put(BreakBadEntities.JESSE_SUIT_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
+        event.put(BreakBadEntities.WALTER_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
+        event.put(BreakBadEntities.WALTER_SUIT_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
     }
 }
