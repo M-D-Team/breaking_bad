@@ -2,6 +2,7 @@ package com.mdt.breakbad.core.init;
 
 import com.mdt.breakbad.BreakBad;
 import com.mdt.breakbad.common.entities.Fulminate;
+import com.mdt.breakbad.common.entities.HumanoidEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -17,4 +18,6 @@ public class BreakBadEntities {
                     .sized(0.25F, 0.25F)
                     .clientTrackingRange(4).updateInterval(10)
                     .build(new ResourceLocation(BreakBad.MODID,"fulminate").toString()));
+    public static final RegistryObject<EntityType<HumanoidEntity>> HUMANOID_ENTITY = ENTITIES.register("humanoid_entity", () ->
+            EntityType.Builder.of(HumanoidEntity::new, MobCategory.CREATURE).sized(1f,2f).build(new ResourceLocation(BreakBad.MODID,"humanoid_entity").toString()));
 }

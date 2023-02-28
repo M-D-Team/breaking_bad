@@ -71,6 +71,7 @@ public class BreakBad
                     output.accept(BreakBadItems.METH.get());
                     output.accept(BreakBadItems.FLAVOURING_EXTRACT.get());
                     output.accept(BreakBadItems.AMETHYST_DUST.get());
+                    output.accept(BreakBadBlocks.BARREL.get().asItem());
                 })
         );
     }
