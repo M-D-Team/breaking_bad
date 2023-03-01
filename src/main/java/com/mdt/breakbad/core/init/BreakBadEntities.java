@@ -4,6 +4,7 @@ import com.mdt.breakbad.BreakBad;
 import com.mdt.breakbad.common.entities.Fulminate;
 import com.mdt.breakbad.common.entities.HumanoidEntity;
 import com.mdt.breakbad.common.entities.humanoids.*;
+import com.mdt.breakbad.common.entities.humanoids.merchants.GusEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;

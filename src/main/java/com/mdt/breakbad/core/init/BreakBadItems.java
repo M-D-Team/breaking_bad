@@ -36,9 +36,11 @@ public class BreakBadItems {
             .effect(new MobEffectInstance(MobEffects.CONFUSION,600,1),0.5f)
             .effect(new MobEffectInstance(MobEffects.DARKNESS,1200,1),0.75f)
             .build())));
+
     public static final RegistryObject<Item> FLAVOURING_EXTRACT = ITEMS.register("flavouring_extract", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().effect(new MobEffectInstance(MobEffects.DARKNESS,200,1),1f).build())));
     public static final RegistryObject<Item> AMETHYST_DUST = ITEMS.register("amethyst_dust", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> BREAKING_BREAD = ITEMS.register("breaking_bread", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(99).saturationMod(99).build())));
+    public static final RegistryObject<Item> CURLY_FRIES = ITEMS.register("curly_fries", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1f).build())));
     public static final RegistryObject<Item> FULMINATE = ITEMS.register("fulminate", () -> new FulminateItem(new Item.Properties()));
     public static final RegistryObject<Item> GAS_MASK = ITEMS.register("gas_mask", () -> new WearableItem(BreakBadArmourMaterials.GAS_MASK, EquipmentSlot.HEAD,new Item.Properties()));
 }
