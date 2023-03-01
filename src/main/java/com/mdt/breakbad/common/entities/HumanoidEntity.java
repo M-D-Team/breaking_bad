@@ -57,6 +57,7 @@ public class HumanoidEntity extends PathfinderMob {
         this.goalSelector.addGoal(3, new OpenDoorGoal(this,true));
         this.goalSelector.addGoal(2,new HurtByTargetGoal(this));
         this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 1.5D,true));
+        this.goalSelector.addGoal(1, new FloatGoal(this));
     }
 
     public static AttributeSupplier.Builder getHumanoidAttributes() {

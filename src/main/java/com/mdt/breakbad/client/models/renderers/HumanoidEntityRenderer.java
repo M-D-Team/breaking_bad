@@ -23,8 +23,10 @@ import net.minecraft.world.entity.Entity;
 
 public class HumanoidEntityRenderer extends LivingEntityRenderer<HumanoidEntity, HumanoidEntityModel> {
     public HumanoidEntityRenderer(EntityRendererProvider.Context context) {
-        super(context, new HumanoidEntityModel(Minecraft.getInstance().getEntityModels().bakeLayer(HumanoidEntityModel.LAYER_LOCATION), false), 0.5f);
+        super(context, new HumanoidEntityModel(Minecraft.getInstance().getEntityModels().bakeLayer(HumanoidEntityModel.LAYER_LOCATION)), 0.5f);
         this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
+        // @TODO ARMOUR RENDERING - "Cannot find ears!"
+        //this.addLayer(new HumanoidArmorLayer<>(this, new HumanoidEntityModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)), new HumanoidEntityModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR))));
         this.addLayer(new CustomHeadLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
     }
 
