@@ -28,6 +28,9 @@ public abstract class MerchantHumanoidEntity extends HumanoidEntity implements I
     private Player tradingPlayer;
     @Nullable
     protected MerchantOffers offers;
+    // A list of trades for the merchant to have, of type MerchantOffer.
+    // Override this in your child of this class to add new trades
+    // for an example see the Gus entity.
     public MerchantOffer[] offerList = {};
     private final SimpleContainer inventory = new SimpleContainer(8);
     public MerchantHumanoidEntity(EntityType<? extends MerchantHumanoidEntity> entityType, Level level) {
