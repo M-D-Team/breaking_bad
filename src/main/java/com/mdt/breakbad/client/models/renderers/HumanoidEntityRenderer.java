@@ -25,8 +25,7 @@ public class HumanoidEntityRenderer extends LivingEntityRenderer<HumanoidEntity,
     public HumanoidEntityRenderer(EntityRendererProvider.Context context) {
         super(context, new HumanoidEntityModel(Minecraft.getInstance().getEntityModels().bakeLayer(HumanoidEntityModel.LAYER_LOCATION)), 0.5f);
         this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
-        // @TODO ARMOUR RENDERING - "Cannot find ears!"
-        //this.addLayer(new HumanoidArmorLayer<>(this, new HumanoidEntityModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)), new HumanoidEntityModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR))));
+        this.addLayer(new HumanoidArmorLayer<>(this, new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_INNER_ARMOR)), new HumanoidModel(context.bakeLayer(ModelLayers.PLAYER_SLIM_OUTER_ARMOR))));
         this.addLayer(new CustomHeadLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
     }
 

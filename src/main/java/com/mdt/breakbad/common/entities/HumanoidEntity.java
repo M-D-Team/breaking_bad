@@ -16,6 +16,7 @@ import net.minecraft.world.level.Level;
 * Class information
 * * How to allow picking up items
 * * * When you want items to be allowed, simply call entity.setCanPickUpLoot( put a boolean here )
+* * * If you want it to move towards nearby items, add MoveTowardsItemGoal as a new goal
  */
 
 public abstract class HumanoidEntity extends PathfinderMob {

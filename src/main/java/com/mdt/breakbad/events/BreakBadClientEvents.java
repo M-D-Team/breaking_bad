@@ -22,7 +22,6 @@ public class BreakBadClientEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers renderers) {
         renderers.registerEntityRenderer(BreakBadEntities.FULMINATE.get(), ThrownItemRenderer::new);
-        renderers.registerEntityRenderer(BreakBadEntities.HUMANOID_ENTITY.get(), HumanoidEntityRenderer::new);
         renderers.registerEntityRenderer(BreakBadEntities.GUS_ENTITY.get(), HumanoidEntityRenderer::new);
         renderers.registerEntityRenderer(BreakBadEntities.JESSE_ENTITY.get(), HumanoidEntityRenderer::new);
         renderers.registerEntityRenderer(BreakBadEntities.JESSE_SUIT_ENTITY.get(), HumanoidEntityRenderer::new);
