@@ -20,8 +20,6 @@ public class BreakBadEntities {
                     .sized(0.25F, 0.25F)
                     .clientTrackingRange(4).updateInterval(10)
                     .build(new ResourceLocation(BreakBad.MODID,"fulminate").toString()));
-    public static final RegistryObject<EntityType<HumanoidEntity>> HUMANOID_ENTITY = ENTITIES.register("humanoid_entity", () ->
-            EntityType.Builder.<HumanoidEntity>of(HumanoidEntity::new, MobCategory.CREATURE).sized(0.6f,1.8f).build(new ResourceLocation(BreakBad.MODID,"humanoid_entity").toString()));
     public static final RegistryObject<EntityType<? extends HumanoidEntity>> GUS_ENTITY = ENTITIES.register("gus_entity", () ->
             EntityType.Builder.of(GusEntity::new, MobCategory.CREATURE).sized(0.6f,1.8f).build(new ResourceLocation(BreakBad.MODID,"gus_entity").toString()));
     public static final RegistryObject<EntityType<? extends HumanoidEntity>> JESSE_ENTITY = ENTITIES.register("jesse_entity", () ->

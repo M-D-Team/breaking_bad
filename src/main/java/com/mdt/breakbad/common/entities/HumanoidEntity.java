@@ -18,7 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 import java.util.Random;
 
-public class HumanoidEntity extends PathfinderMob {
+public abstract class HumanoidEntity extends PathfinderMob {
     private static final ResourceLocation ERROR_TEXTURE = new ResourceLocation(BreakBad.MODID,"textures/entities/humanoid/error.png");
     public String customName = "ERROR";
     public ResourceLocation skin;

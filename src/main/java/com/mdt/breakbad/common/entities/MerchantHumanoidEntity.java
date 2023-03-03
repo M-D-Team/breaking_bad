@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 
-public class MerchantHumanoidEntity extends HumanoidEntity implements InventoryCarrier, Npc, Merchant {
+public abstract class MerchantHumanoidEntity extends HumanoidEntity implements InventoryCarrier, Npc, Merchant {
     public static final int MERCHANT_SLOT_OFFSET = 300;
     private static final int MERCHANT_INVENTORY_SIZE = 8;
     @Nullable
