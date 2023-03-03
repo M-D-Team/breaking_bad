@@ -3,20 +3,20 @@ package com.mdt.breakbad.common.entities;
 import com.mdt.breakbad.BreakBad;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.behavior.Swim;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.ForgeMod;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.Objects;
-import java.util.Random;
+/*
+* Class information
+* * How to allow picking up items
+* * * When you want items to be allowed, simply call entity.setCanPickUpLoot( put a boolean here )
+ */
 
 public abstract class HumanoidEntity extends PathfinderMob {
     private static final ResourceLocation ERROR_TEXTURE = new ResourceLocation(BreakBad.MODID,"textures/entities/humanoid/error.png");
