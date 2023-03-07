@@ -22,5 +22,6 @@ public class BreakBadModEvents {
         event.put(BreakBadEntities.JESSE_SUIT_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
         event.put(BreakBadEntities.WALTER_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
         event.put(BreakBadEntities.WALTER_SUIT_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
+        event.put(BreakBadEntities.SAUL_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
     }
 }

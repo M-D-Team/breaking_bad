@@ -16,6 +16,9 @@ public class GusEntity extends MerchantHumanoidEntity {
     private static final ResourceLocation GUS_TEXTURE = new ResourceLocation(BreakBad.MODID,"textures/entities/humanoid/gus.png");
     public GusEntity(EntityType<? extends GusEntity> entityType, Level level) {
         super(entityType, level, "Gus", GUS_TEXTURE);
-        this.offerList = new MerchantOffer[]{new MerchantOffer(Items.EMERALD.getDefaultInstance(), Items.COOKED_CHICKEN.getDefaultInstance(), 1, 16, 1f),new MerchantOffer(Items.EMERALD.getDefaultInstance(), BreakBadItems.CURLY_FRIES.get().getDefaultInstance(), 1, 16, 1f)};
+        this.offerList = new MerchantOffer[]{
+                new MerchantOffer(Items.EMERALD.getDefaultInstance(), Items.COOKED_CHICKEN.getDefaultInstance(), 1, 16, 1f),
+                new MerchantOffer(Items.EMERALD.getDefaultInstance(), BreakBadItems.CURLY_FRIES.get().getDefaultInstance(), 1, 16, 1f)
+        };
     }
 }
