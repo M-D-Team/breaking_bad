@@ -1,0 +1,47 @@
+{
+  "saul_deep": {
+    "subtitle": "Saul Goodman Speaks",
+    "sounds": [
+      {
+        "name": "breakbad:entities/saul/saul_deep_bcs",
+        "stream": false
+      }
+    ]
+  },
+  "saul_fight": {
+    "subtitle": "Saul Goodman Speaks",
+    "sounds": [
+      {
+        "name": "breakbad:entities/saul/saul_fight",
+        "stream": false
+      }
+    ]
+  },
+  "saul_full": {
+    "subtitle": "Saul Goodman Speaks",
+    "sounds": [
+      {
+        "name": "breakbad:entities/saul/saul_full",
+        "stream": false
+      }
+    ]
+  },
+  "saul_innocent": {
+    "subtitle": "Saul Goodman Speaks",
+    "sounds": [
+      {
+        "name": "breakbad:entities/saul/saul_innocent",
+        "stream": false
+      }
+    ]
+  },
+  "saul_rights": {
+    "subtitle": "Saul Goodman Speaks",
+    "sounds": [
+      {
+        "name": "breakbad:entities/saul/saul_rights",
+        "stream": false
+      }
+    ]
+  }
+}
