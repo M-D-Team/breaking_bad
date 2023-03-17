@@ -6,7 +6,11 @@ import com.mdt.breakbad.core.init.BreakBadItems;
 import com.mdt.breakbad.core.init.BreakBadSounds;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
@@ -31,9 +35,7 @@ public class SaulEntity extends HumanoidEntity {
         this.skin = selectRandomSkin(this.skinList);
     }
 
-    @Nullable
-    @Override
-    protected SoundEvent getAmbientSound() {
+    private SoundEvent getRandomSaulSound() {
         Random random = new Random();
         int selection = random.nextInt(6); // Because theres 5 sound effects.
         switch (selection) {
@@ -56,6 +58,19 @@ public class SaulEntity extends HumanoidEntity {
                 return BreakBadSounds.SAUL_RIGHTS.get();
             }
         }
+    }
+
+//    @Override
+//    protected InteractionResult mobInteract(Player pPlayer, InteractionHand p_21473_) {
+//        pPlayer.level.playSound(null, this.blockPosition(),getRandomSaulSound(), SoundSource.NEUTRAL);
+//        return super.mobInteract(pPlayer, p_21473_);
+//    }
+
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return getRandomSaulSound();
     }
 
     public static ResourceLocation selectRandomSkin(ResourceLocation[] list) {

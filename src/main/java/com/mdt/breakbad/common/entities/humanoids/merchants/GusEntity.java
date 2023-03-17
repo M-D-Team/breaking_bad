@@ -17,8 +17,9 @@ public class GusEntity extends MerchantHumanoidEntity {
     public GusEntity(EntityType<? extends GusEntity> entityType, Level level) {
         super(entityType, level, "Gus", GUS_TEXTURE);
         this.offerList = new MerchantOffer[]{
-                new MerchantOffer(Items.EMERALD.getDefaultInstance(), Items.COOKED_CHICKEN.getDefaultInstance(), 1, 16, 1f),
-                new MerchantOffer(Items.EMERALD.getDefaultInstance(), BreakBadItems.CURLY_FRIES.get().getDefaultInstance(), 1, 16, 1f)
+                new MerchantOffer(Items.EMERALD.getDefaultInstance(), Items.COOKED_CHICKEN.getDefaultInstance().copyWithCount(16), 1, 16, 1f),
+                new MerchantOffer(Items.EMERALD.getDefaultInstance(), BreakBadItems.CURLY_FRIES.get().getDefaultInstance().copyWithCount(9), 1, 16, 1f)
         };
     }
 }
+
