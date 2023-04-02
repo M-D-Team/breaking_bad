@@ -2,6 +2,7 @@ package com.mdt.breakbad.events;
 
 import com.mdt.breakbad.BreakBad;
 import com.mdt.breakbad.common.entities.HumanoidEntity;
+import com.mdt.breakbad.common.entities.rideables.WheelchairEntity;
 import com.mdt.breakbad.core.init.BreakBadEntities;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,6 +25,8 @@ public class BreakBadModEvents {
         event.put(BreakBadEntities.WALTER_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
         event.put(BreakBadEntities.WALTER_SUIT_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
         event.put(BreakBadEntities.SAUL_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
+        event.put(BreakBadEntities.HECTOR_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
         event.put(BreakBadEntities.LPH_WORKER_ENTITY.get(), HumanoidEntity.getHumanoidAttributes().build());
+        event.put(BreakBadEntities.WHEELCHAIR_ENTITY.get(), WheelchairEntity.getWheelchairAttributes().build());
     }
 }
