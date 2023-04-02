@@ -2,6 +2,7 @@ package com.mdt.breakbad;
 
 import com.mdt.breakbad.client.models.renderers.tileentities.BunsenBurnerRenderer;
 import com.mdt.breakbad.core.init.*;
+import com.mdt.breakbad.networking.Network;
 import com.mdt.breakbad.util.BetterBrewingRecipe;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -89,6 +90,8 @@ public class BreakBad
             BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadPotions.CRYSTLAMINE_POTION.get(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.SEAWEED_EXTRACT.get()).getItem(),BreakBadPotions.PURE_COMPOUND.get()));
             BrewingRecipeRegistry.addRecipe(new BetterBrewingRecipe(BreakBadPotions.PURE_COMPOUND.get(), BreakBadItems.FLAVOURING_EXTRACT.get(),BreakBadItems.METH.get()));
         });
+
+        Network.register();
     }
 
 

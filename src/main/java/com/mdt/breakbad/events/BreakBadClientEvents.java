@@ -1,6 +1,5 @@
 package com.mdt.breakbad.events;
 
-import com.google.common.collect.ImmutableMap;
 import com.mdt.breakbad.BreakBad;
 import com.mdt.breakbad.client.models.entities.HumanoidEntityModel;
 import com.mdt.breakbad.client.models.entities.rideables.WheelchairModel;
@@ -8,18 +7,23 @@ import com.mdt.breakbad.client.models.renderers.HumanoidEntityRenderer;
 import com.mdt.breakbad.client.models.renderers.rideables.WheelchairRenderer;
 import com.mdt.breakbad.client.models.renderers.tileentities.BunsenBurnerRenderer;
 import com.mdt.breakbad.client.models.tileentities.BunsenBurner;
+import com.mdt.breakbad.common.entities.rideables.WheelchairEntity;
 import com.mdt.breakbad.core.init.BreakBadEntities;
 import com.mdt.breakbad.core.init.BreakBadTiles;
+import com.mdt.breakbad.networking.Network;
+import com.mdt.breakbad.networking.packets.RingBellC2SPacket;
+import com.mdt.breakbad.util.KeyBinding;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.PlayerModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = BreakBad.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BreakBadClientEvents {
@@ -45,6 +49,28 @@ public class BreakBadClientEvents {
 
         //Block entities
         renderers.registerBlockEntityRenderer(BreakBadTiles.BUNSEN_BURNER_TILE.get(), BunsenBurnerRenderer::new);
+    }
+
+    @Mod.EventBusSubscriber(modid = BreakBad.MODID, value = Dist.CLIENT)
+    public static class ClientForgeEvents {
+
+        @SubscribeEvent
+        public static void onKeyInput(InputEvent.Key event) {
+            if (KeyBinding.RING_BELL.consumeClick()) {
+                Network.sendToServer(new RingBellC2SPacket());
+            }
+        }
+
+    }
+
+    @Mod.EventBusSubscriber(modid = BreakBad.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ClientModBusEvents {
+
+        @SubscribeEvent
+        public static void onKeyRegister(RegisterKeyMappingsEvent event) {
+            event.register(KeyBinding.RING_BELL);
+        }
+
     }
 
 

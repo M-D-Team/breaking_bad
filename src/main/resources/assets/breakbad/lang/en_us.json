@@ -12,5 +12,7 @@
   "block.breakbad.barrel": "Barrel",
   "effect.breakbad.crystlamine": "A needed ingredient in the making of Product to create that signature crystal.",
   "effect.breakbad.seaweed": "Give it that little more blue.",
-  "effect.breakbad.pure_compound": "The purest of potions."
+  "effect.breakbad.pure_compound": "The purest of potions.",
+  "key.category.mdt.breakbad": "Breaking Craft",
+  "key.mdt.ring_bell": "Ring Bell"
 }

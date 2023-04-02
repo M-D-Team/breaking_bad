@@ -19,7 +19,7 @@ public class BreakBadEntities {
 
     public static final RegistryObject<EntityType<WheelchairEntity>> WHEELCHAIR_ENTITY = ENTITIES.register("wheelchair_entity", () ->
             EntityType.Builder.of(WheelchairEntity::new, MobCategory.MISC)
-                    .sized(0.25F, 0.25F)
+                    .sized(1.25F, 1F)
                     .build(new ResourceLocation(BreakBad.MODID, "wheelchair_entity").toString()));
 
     // Items
