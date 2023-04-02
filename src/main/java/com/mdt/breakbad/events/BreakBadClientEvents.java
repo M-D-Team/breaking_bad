@@ -10,11 +10,10 @@ import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = BreakBad.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class BreakBadClientEvents {
@@ -22,11 +21,13 @@ public class BreakBadClientEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers renderers) {
         renderers.registerEntityRenderer(BreakBadEntities.FULMINATE.get(), ThrownItemRenderer::new);
+        renderers.registerEntityRenderer(BreakBadEntities.HUMANOID_ENTITY.get(), HumanoidEntityRenderer::new);
         renderers.registerEntityRenderer(BreakBadEntities.GUS_ENTITY.get(), HumanoidEntityRenderer::new);
         renderers.registerEntityRenderer(BreakBadEntities.JESSE_ENTITY.get(), HumanoidEntityRenderer::new);
         renderers.registerEntityRenderer(BreakBadEntities.JESSE_SUIT_ENTITY.get(), HumanoidEntityRenderer::new);
         renderers.registerEntityRenderer(BreakBadEntities.WALTER_ENTITY.get(), HumanoidEntityRenderer::new);
         renderers.registerEntityRenderer(BreakBadEntities.WALTER_SUIT_ENTITY.get(), HumanoidEntityRenderer::new);
+        renderers.registerEntityRenderer(BreakBadEntities.LPH_WORKER_ENTITY.get(), HumanoidEntityRenderer::new);
         renderers.registerEntityRenderer(BreakBadEntities.SAUL_ENTITY.get(), HumanoidEntityRenderer::new);
     }
 

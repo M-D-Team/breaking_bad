@@ -49,6 +49,7 @@ public class BreakBad
         BreakBadEffects.MOB_EFFECTS.register(modEventBus);
         BreakBadPotions.POTIONS.register(modEventBus);
         BreakBadSounds.SOUNDS.register(modEventBus);
+        BreakBadTiles.BLOCK_ENTITIES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

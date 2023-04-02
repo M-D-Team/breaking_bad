@@ -1,7 +1,5 @@
 package com.mdt.breakbad.client.models.renderers;
 
-import com.ibm.icu.text.Normalizer;
-import com.mdt.breakbad.BreakBad;
 import com.mdt.breakbad.client.models.entities.HumanoidEntityModel;
 import com.mdt.breakbad.common.entities.HumanoidEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
