@@ -3,6 +3,7 @@ package com.mdt.breakbad.client.models.tileentities;// Made with Blockbench 4.6.
 // Paste this class into your mod and generate all required imports
 
 
+import com.mdt.breakbad.BreakBad;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -15,17 +16,17 @@ import net.minecraft.world.entity.Entity;
 
 public class BunsenBurner<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "custom_model"), "main");
-	private final ModelPart plate_stands;
-	private final ModelPart candle;
-	private final ModelPart flask;
-	private final ModelPart one;
-	private final ModelPart two;
-	private final ModelPart three;
-	private final ModelPart four;
-	private final ModelPart five;
-	private final ModelPart six;
-	private final ModelPart seven;
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(BreakBad.MODID, "bunsen_burner"), "main");
+	public final ModelPart plate_stands;
+	public final ModelPart candle;
+	public final ModelPart flask;
+	public final ModelPart one;
+	public final ModelPart two;
+	public final ModelPart three;
+	public final ModelPart four;
+	public final ModelPart five;
+	public final ModelPart six;
+	public final ModelPart seven;
 
 	public BunsenBurner(ModelPart root) {
 		this.plate_stands = root.getChild("plate_stands");
@@ -93,5 +94,9 @@ public class BunsenBurner<T extends Entity> extends EntityModel<T> {
 		five.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		six.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
 		seven.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
+
+	public void render(PoseStack pPoseStack, VertexConsumer buffer, int pPackedLight, int pPackedOverlay, int i, int i1, int i2, int i3) {
+		this.renderToBuffer(pPoseStack, buffer, pPackedLight, pPackedOverlay,1, 1,1,1);
 	}
 }

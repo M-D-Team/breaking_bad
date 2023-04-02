@@ -3,23 +3,44 @@ package com.mdt.breakbad.common.blocks;
 import com.mdt.breakbad.common.blockentities.BunsenBurnerTile;
 import com.mdt.breakbad.core.init.BreakBadTiles;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.CubeVoxelShape;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BunsenBurnerBlock extends BaseEntityBlock {
 
-    public BunsenBurnerBlock(Properties p_49795_) {
+    protected final ParticleOptions flameParticle;
+
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
+    private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 20, 12);
+    public BunsenBurnerBlock(Properties p_49795_, ParticleOptions pO) {
         super(p_49795_);
+        this.flameParticle = pO;
     }
 
-    public BunsenBurnerBlock() {
-        this(BlockBehaviour.Properties.of(Material.HEAVY_METAL).strength(5f, 20f));
+    @Override
+    public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
+        return SHAPE;
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState p_49232_) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
@@ -32,9 +53,26 @@ public class BunsenBurnerBlock extends BaseEntityBlock {
         };
     }
 
-
     @Override
     public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
         return BreakBadTiles.BUNSEN_BURNER_TILE.get().create(p_153215_, p_153216_);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+    }
+
+    public void animateTick(BlockState p_222593_, Level p_222594_, BlockPos p_222595_, RandomSource p_222596_) {
+        double d0 = (double)p_222595_.getX() + 0.5D;
+        double d1 = (double)p_222595_.getY() + 0.5D;
+        double d2 = (double)p_222595_.getZ() + 0.5D;
+        p_222594_.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+        p_222594_.addParticle(this.flameParticle, d0, d1, d2, 0.0D, 0.0D, 0.0D);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
     }
 }
