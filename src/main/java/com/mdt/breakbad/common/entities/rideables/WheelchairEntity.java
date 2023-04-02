@@ -95,6 +95,6 @@ public class WheelchairEntity extends Mob {
     }
 
     public static AttributeSupplier.Builder getWheelchairAttributes() {
-        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 25.0D).add(Attributes.MOVEMENT_SPEED, 0.2D).add(Attributes.ATTACK_DAMAGE, 0D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 25.0D).add(Attributes.MOVEMENT_SPEED, 0.05D).add(Attributes.ATTACK_DAMAGE, 0D);
     }
 }
