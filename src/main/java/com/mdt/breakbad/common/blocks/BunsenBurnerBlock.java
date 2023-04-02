@@ -3,10 +3,12 @@ package com.mdt.breakbad.common.blocks;
 import com.mdt.breakbad.common.blockentities.BunsenBurnerTile;
 import com.mdt.breakbad.core.init.BreakBadTiles;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -18,19 +20,42 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.CubeVoxelShape;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class BunsenBurnerBlock extends BaseEntityBlock {
 
     protected final ParticleOptions flameParticle;
-
+    public int liquidLevel = 0;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 20, 12);
     public BunsenBurnerBlock(Properties p_49795_, ParticleOptions pO) {
         super(p_49795_);
         this.flameParticle = pO;
+    }
+
+    public int getLiquidLevel() {
+        return this.liquidLevel;
+    }
+
+    public void updateLiquidLevel() {
+        this.liquidLevel++;
+        if (this.liquidLevel > 7) {this.liquidLevel = 0;}
+    }
+
+    @Override
+    public InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!level.isClientSide && hand == InteractionHand.MAIN_HAND) {
+            BlockEntity blockEntity = level.getBlockEntity(blockPos);
+
+            if (blockEntity instanceof BunsenBurnerTile) {
+                this.updateLiquidLevel();
+
+                return InteractionResult.SUCCESS;
+            }
+        }
+        return InteractionResult.FAIL;
     }
 
     @Override
