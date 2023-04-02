@@ -1,13 +1,10 @@
 package com.mdt.breakbad.common.entities.rideables;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -30,28 +27,64 @@ public class WheelchairEntity extends Mob {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         if (hand == InteractionHand.MAIN_HAND) {
-            ItemStack getItemStack = player.getItemInHand(InteractionHand.MAIN_HAND);
-            if(getItemStack != ItemStack.EMPTY) {
-                if((getItemStack.getItem() == Items.BELL)) {
+            ItemStack handStack = player.getItemInHand(InteractionHand.MAIN_HAND);
+            if(handStack != ItemStack.EMPTY) {
+                // Add a bell if the players holding one
+                if(compareItemStackToItem(handStack,Items.BELL)) {
                     this.setBell(true);
-                    getItemStack.setCount(getItemStack.getCount() - 1);
+                    handStack.setCount(handStack.getCount() - 1);
                 }
-                if(getItemStack.getItem() == Items.TNT) {
+                // Add TNT if the players holding TNT
+                if(compareItemStackToItem(handStack, Items.TNT)) {
                     this.setTNT(true);
-                    getItemStack.setCount(getItemStack.getCount() - 1);
+                    handStack.setCount(handStack.getCount() - 1);
                 }
-                return InteractionResult.SUCCESS;
             } else {
+                // If the player is crouching and this has a bell then remove the bell
                 if(this.hasBell() && player.isCrouching()) {
                     player.addItem(new ItemStack(Items.BELL));
                     this.setBell(false);
                     return InteractionResult.SUCCESS;
                 }
+                // If the player is crouching and this has TNT then remove the TNT
+                else if (this.hasTNT() && player.isCrouching()) {
+                    player.addItem(new ItemStack(Items.TNT));
+                    this.setTNT(false);
+                    return InteractionResult.SUCCESS;
+                }
                 player.startRiding(this);
-                return InteractionResult.SUCCESS;
-            }
+            } return InteractionResult.SUCCESS;
         }
-        return InteractionResult.FAIL;
+        return InteractionResult.SUCCESS;
+    }
+
+    /**
+     * Compares if two {@link Item Items} are the same
+     * @param first The first item
+     * @param second The second item
+     * @return If they're the same
+     */
+    public static boolean compareTwoItem(Item first, Item second) {
+        return first == second;
+    }
+
+    /**
+     * Compares if two {@link ItemStack ItemStacks} are the same
+     * @param first First itemstack
+     * @param second Second itemstack
+     * @return If they're the same
+     */
+    public static boolean compareTwoItemStack(ItemStack first, ItemStack second) {
+        return compareTwoItem(first.getItem(),second.getItem());
+    }
+    /**
+     * Compares if an {@link ItemStack ItemStack} is the same to an {@link Item Item}
+     * @param stack The ItemStack
+     * @param item The Item
+     * @return If they're the same
+     */
+    public static boolean compareItemStackToItem(ItemStack stack, Item item) {
+        return compareTwoItem(stack.getItem(), item);
     }
 
     public boolean hasBell() {
@@ -125,8 +158,8 @@ public class WheelchairEntity extends Mob {
         }
     }
 
-    public void explodeWheelchair(Entity p_20320_) {
-        p_20320_.getLevel().explode(p_20320_,p_20320_.getX(),p_20320_.getY(),p_20320_.getZ(),5, Level.ExplosionInteraction.MOB);
+    public void explode() {
+        this.getLevel().explode(this,this.getX(),this.getY(),this.getZ(),5, Level.ExplosionInteraction.MOB);
         this.kill();
     }
 

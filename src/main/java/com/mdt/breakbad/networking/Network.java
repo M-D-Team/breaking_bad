@@ -1,6 +1,7 @@
 package com.mdt.breakbad.networking;
 
 import com.mdt.breakbad.BreakBad;
+import com.mdt.breakbad.networking.packets.IgniteTNTC2SPacket;
 import com.mdt.breakbad.networking.packets.RingBellC2SPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,6 +32,11 @@ public class Network {
                 .decoder(RingBellC2SPacket::new)
                 .encoder(RingBellC2SPacket::toBytes)
                 .consumerMainThread(RingBellC2SPacket::handle)
+                .add();
+        net.messageBuilder(IgniteTNTC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(IgniteTNTC2SPacket::new)
+                .encoder(IgniteTNTC2SPacket::toBytes)
+                .consumerMainThread(IgniteTNTC2SPacket::handle)
                 .add();
     }
 

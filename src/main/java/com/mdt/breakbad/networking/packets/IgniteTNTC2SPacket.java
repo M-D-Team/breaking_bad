@@ -4,19 +4,17 @@ import com.mdt.breakbad.common.entities.rideables.WheelchairEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
-public class RingBellC2SPacket {
+public class IgniteTNTC2SPacket {
 
-    public RingBellC2SPacket() {
+    public IgniteTNTC2SPacket() {
 
     }
 
-    public RingBellC2SPacket(FriendlyByteBuf buf) {
+    public IgniteTNTC2SPacket(FriendlyByteBuf buf) {
 
     }
 
@@ -33,9 +31,9 @@ public class RingBellC2SPacket {
 
             if(player.getVehicle() instanceof WheelchairEntity) {
                 WheelchairEntity wheelchair = (WheelchairEntity) player.getVehicle();
-                if(wheelchair.hasBell()) {
-                    level.playSound(null, player.getOnPos(), SoundEvents.ANVIL_PLACE, SoundSource.PLAYERS,
-                            1, 2);
+
+                if (wheelchair.hasTNT()) {
+                    wheelchair.explode();
                 }
             }
         });

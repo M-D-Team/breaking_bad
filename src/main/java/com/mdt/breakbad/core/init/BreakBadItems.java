@@ -12,6 +12,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -36,6 +37,7 @@ public class BreakBadItems {
             .effect(new MobEffectInstance(MobEffects.CONFUSION,600,1),0.5f)
             .effect(new MobEffectInstance(MobEffects.DARKNESS,1200,1),0.75f)
             .build())));
+
 
     public static final RegistryObject<Item> FLAVOURING_EXTRACT = ITEMS.register("flavouring_extract", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().effect(new MobEffectInstance(MobEffects.DARKNESS,200,1),1f).build())));
     public static final RegistryObject<Item> AMETHYST_DUST = ITEMS.register("amethyst_dust", () -> new Item(new Item.Properties()));

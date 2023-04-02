@@ -11,6 +11,7 @@ import com.mdt.breakbad.common.entities.rideables.WheelchairEntity;
 import com.mdt.breakbad.core.init.BreakBadEntities;
 import com.mdt.breakbad.core.init.BreakBadTiles;
 import com.mdt.breakbad.networking.Network;
+import com.mdt.breakbad.networking.packets.IgniteTNTC2SPacket;
 import com.mdt.breakbad.networking.packets.RingBellC2SPacket;
 import com.mdt.breakbad.util.KeyBinding;
 import net.minecraft.client.Minecraft;
@@ -59,6 +60,9 @@ public class BreakBadClientEvents {
             if (KeyBinding.RING_BELL.consumeClick()) {
                 Network.sendToServer(new RingBellC2SPacket());
             }
+            if (KeyBinding.IGNITE_TNT.consumeClick()) {
+                Network.sendToServer(new IgniteTNTC2SPacket());
+            }
         }
 
     }
@@ -69,6 +73,7 @@ public class BreakBadClientEvents {
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event) {
             event.register(KeyBinding.RING_BELL);
+            event.register(KeyBinding.IGNITE_TNT);
         }
 
     }
