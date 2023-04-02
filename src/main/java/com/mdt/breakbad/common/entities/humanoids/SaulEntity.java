@@ -2,17 +2,10 @@ package com.mdt.breakbad.common.entities.humanoids;
 
 import com.mdt.breakbad.BreakBad;
 import com.mdt.breakbad.common.entities.HumanoidEntity;
-import com.mdt.breakbad.core.init.BreakBadItems;
 import com.mdt.breakbad.core.init.BreakBadSounds;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
