@@ -10,13 +10,12 @@ import net.minecraft.client.model.BookModel;
 import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -29,6 +28,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.RegistryObject;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -70,15 +70,18 @@ public class BreakBad
                 .icon(() -> new ItemStack(BreakBadItems.METH.get()))
                 .title(Component.translatable("tabs.breakbad.breakbad_tab"))
                 .displayItems((featureFlags, output, hasOp) -> {
-                    // Try and group them together.
-                    output.accept(PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.CRYSTLAMINE_POTION.get()));
-                    output.accept(PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.PURE_COMPOUND.get()));
-                    output.accept(PotionUtils.setPotion(Items.POTION.getDefaultInstance(),BreakBadPotions.SEAWEED_EXTRACT.get()));
-                    output.accept(BreakBadItems.FULMINATE.get());
-                    output.accept(BreakBadItems.METH.get());
-                    output.accept(BreakBadItems.FLAVOURING_EXTRACT.get());
-                    output.accept(BreakBadItems.AMETHYST_DUST.get());
-                    output.accept(BreakBadBlocks.BARREL.get().asItem());
+                    // Add all the items in BreakBadItems
+                    for (RegistryObject<Item> item : BreakBadItems.ITEMS.getEntries()) {
+                        output.accept(item.get());
+                    }
+                    // Add all the blocks in BreakBadBlocks
+                    for (RegistryObject<Block> block : BreakBadBlocks.BLOCKS.getEntries()) {
+                        output.accept(block.get().asItem());
+                    }
+                    // Add all the potions in BreakBadPotions
+                    for (RegistryObject<Potion> potion : BreakBadPotions.POTIONS.getEntries()) {
+                        output.accept(PotionUtils.setPotion(Items.POTION.getDefaultInstance(), potion.get()));
+                    }
                 })
         );
     }
