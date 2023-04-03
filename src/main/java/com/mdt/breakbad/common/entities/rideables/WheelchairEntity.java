@@ -1,14 +1,19 @@
 package com.mdt.breakbad.common.entities.rideables;
 
 import com.mdt.breakbad.common.entities.HumanoidEntity;
-import com.mdt.breakbad.common.entities.humanoids.HectorEntity;
 import com.mdt.breakbad.core.init.BreakBadItems;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -17,7 +22,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 
@@ -26,8 +30,8 @@ public class WheelchairEntity extends Mob {
         super(p_20966_, p_20967_);
     }
 
-    public boolean bellAttained = false;
-    public boolean tntAttained = false;
+    private static final EntityDataAccessor<Boolean> HAS_BELL = SynchedEntityData.defineId(WheelchairEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> HAS_TNT = SynchedEntityData.defineId(WheelchairEntity.class, EntityDataSerializers.BOOLEAN);
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
@@ -37,6 +41,7 @@ public class WheelchairEntity extends Mob {
                 // Add a bell if the players holding one
                 if(compareItemStackToItem(handStack,Items.BELL)) {
                     this.setBell(true);
+//                    this.sendUpdateBellPacket();
                     handStack.setCount(handStack.getCount() - 1);
                 }
                 // Add TNT if the players holding TNT
@@ -49,6 +54,7 @@ public class WheelchairEntity extends Mob {
                 if(this.hasBell() && player.isCrouching()) {
                     player.addItem(new ItemStack(Items.BELL));
                     this.setBell(false);
+//                    this.sendUpdateBellPacket();
                     return InteractionResult.SUCCESS;
                 }
                 // If the player is crouching and this has TNT then remove the TNT
@@ -62,6 +68,10 @@ public class WheelchairEntity extends Mob {
         }
         return InteractionResult.SUCCESS;
     }
+
+//    private void sendUpdateBellPacket() {
+//        Network.sendToAll(new UpdateBellS2CPacket(this.getUUID(),this.hasBell()));
+//    }
 
     /**
      * Compares if two {@link Item Items} are the same
@@ -93,19 +103,18 @@ public class WheelchairEntity extends Mob {
     }
 
     public boolean hasBell() {
-        return this.bellAttained;
+        return this.entityData.get(HAS_BELL);
     }
 
     public void setBell(boolean b) {
-        this.bellAttained = b;
+        this.entityData.set(HAS_BELL,b);
     }
 
     public boolean hasTNT() {
-        return this.tntAttained;
+        return this.entityData.get(HAS_TNT);
     }
-
     public void setTNT(boolean b) {
-        this.tntAttained = b;
+        this.entityData.set(HAS_TNT,b);
     }
 
     public void travel(Vec3 p_30633_) {
@@ -189,15 +198,24 @@ public class WheelchairEntity extends Mob {
     @Override
     public void readAdditionalSaveData(CompoundTag nbt) {
         super.readAdditionalSaveData(nbt);
-        this.bellAttained = nbt.getBoolean("bellAttained");
-        this.tntAttained = nbt.getBoolean("tntAttained");
+        this.entityData.set(HAS_BELL, nbt.getBoolean("hasBell"));
+        this.entityData.set(HAS_TNT, nbt.getBoolean("hasTNT"));
+        this.setTNT(nbt.getBoolean("hasTNT"));
+        this.setBell(nbt.getBoolean("hasBell"));
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag nbt) {
         super.addAdditionalSaveData(nbt);
-        nbt.putBoolean("bellAttained", this.bellAttained);
-        nbt.putBoolean("tntAttained", this.tntAttained);
+        nbt.putBoolean("hasTNT",this.hasTNT());
+        nbt.putBoolean("hasBell",this.hasBell());
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(HAS_BELL, false);
+        this.entityData.define(HAS_TNT, false);
     }
 
     @Override
