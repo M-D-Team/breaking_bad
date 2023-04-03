@@ -1,6 +1,5 @@
 package com.mdt.breakbad.common.blocks;
 
-import com.mdt.breakbad.common.blockentities.BunsenBurnerTile;
 import com.mdt.breakbad.common.blockentities.CondenserTile;
 import com.mdt.breakbad.core.init.BreakBadTiles;
 import net.minecraft.core.BlockPos;
@@ -31,7 +30,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class CondenserBlock extends BaseEntityBlock {
 
     protected final ParticleOptions flameParticle;
-    public int liquidLevel = 0;
+    private int liquidLevel = 0;
     public boolean isLit = false;
     public boolean hasCandle = false;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;

@@ -1,7 +1,6 @@
 package com.mdt.breakbad.common.blocks;
 
 import com.mdt.breakbad.common.blockentities.BunsenBurnerTile;
-import com.mdt.breakbad.common.blockentities.CondenserTile;
 import com.mdt.breakbad.core.init.BreakBadTiles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -14,7 +13,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -29,9 +30,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class BunsenBurnerBlock extends BaseEntityBlock {
 
     protected final ParticleOptions flameParticle;
-    public int liquidLevel = 0;
+    private int liquidLevel = 0;
     public boolean isLit = false;
-    public boolean hasCandle = false;
+    private boolean hasCandle = false;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 20, 12);
     public BunsenBurnerBlock(Properties p_49795_, ParticleOptions pO) {
@@ -39,21 +40,8 @@ public class BunsenBurnerBlock extends BaseEntityBlock {
         this.flameParticle = pO;
     }
 
-    public int getLiquidLevel() {
-        return this.liquidLevel;
-    }
-
-    public void updateLiquidLevel() {
-        this.liquidLevel++;
-        if (this.liquidLevel > 7) {this.liquidLevel = 0;}
-    }
-
     public boolean isCandleLit() {
         return this.isLit;
-    }
-
-    public boolean doesItHaveCandle() {
-        return this.hasCandle;
     }
 
     @Override
@@ -62,11 +50,12 @@ public class BunsenBurnerBlock extends BaseEntityBlock {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
             if (blockEntity instanceof BunsenBurnerTile) {
                 if(player.getMainHandItem().isEmpty()) {
-                    this.updateLiquidLevel();
-                } else if (player.getMainHandItem().getItem() == Items.FLINT_AND_STEEL && this.doesItHaveCandle()) {
+                    System.out.println(blockEntity);
+                    ((BunsenBurnerTile) blockEntity).updateLiquidLevel();
+                } else if (player.getMainHandItem().getItem() == Items.FLINT_AND_STEEL && ((BunsenBurnerTile) blockEntity).hasCandle()) {
                     this.isLit = true;
                 } else if (player.getMainHandItem().getItem() == Items.LIGHT_GRAY_CANDLE) {
-                    this.hasCandle = true;
+                    ((BunsenBurnerTile) blockEntity).setCandle(true);
                 }
                 return InteractionResult.SUCCESS;
             }

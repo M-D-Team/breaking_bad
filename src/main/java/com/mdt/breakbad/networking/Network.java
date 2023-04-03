@@ -3,6 +3,7 @@ package com.mdt.breakbad.networking;
 import com.mdt.breakbad.BreakBad;
 import com.mdt.breakbad.networking.packets.IgniteTNTC2SPacket;
 import com.mdt.breakbad.networking.packets.RingBellC2SPacket;
+import com.mdt.breakbad.networking.packets.UpdateBunsenBurnerS2CPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -38,11 +39,11 @@ public class Network {
                 .encoder(IgniteTNTC2SPacket::toBytes)
                 .consumerMainThread(IgniteTNTC2SPacket::handle)
                 .add();
-//        net.messageBuilder(UpdateBellS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
-//                .decoder(UpdateBellS2CPacket::decode)
-//                .encoder(UpdateBellS2CPacket::encode)
-//                .consumerMainThread(UpdateBellS2CPacket::handle)
-//                .add();
+        net.messageBuilder(UpdateBunsenBurnerS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(UpdateBunsenBurnerS2CPacket::decode)
+                .encoder(UpdateBunsenBurnerS2CPacket::encode)
+                .consumerMainThread(UpdateBunsenBurnerS2CPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message) {

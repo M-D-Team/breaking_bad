@@ -1,34 +1,21 @@
 package com.mdt.breakbad.client.models.renderers.tileentities;
 
-import com.google.common.collect.ImmutableMap;
 import com.mdt.breakbad.BreakBad;
-import com.mdt.breakbad.client.models.entities.HumanoidEntityModel;
 import com.mdt.breakbad.client.models.tileentities.BunsenBurner;
 import com.mdt.breakbad.common.blockentities.BunsenBurnerTile;
 import com.mdt.breakbad.common.blocks.BunsenBurnerBlock;
-import com.mdt.breakbad.core.init.BreakBadItems;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.block.Block;
 
 public class BunsenBurnerRenderer implements BlockEntityRenderer<BunsenBurnerTile> {
 
@@ -37,6 +24,8 @@ public class BunsenBurnerRenderer implements BlockEntityRenderer<BunsenBurnerTil
     public static final ResourceLocation BUNSEN_BURNER = new ResourceLocation(BreakBad.MODID, "textures/tileentities/bunsen_burner.png");
 
     public int MaxLight = 15728880;
+    private int liquidLevel;
+    private boolean hasCandle;
 
     public BunsenBurnerRenderer(BlockEntityRendererProvider.Context ctx) {
         this.model = new BunsenBurner<>(ctx.bakeLayer(BunsenBurner.LAYER_LOCATION));
@@ -69,7 +58,7 @@ public class BunsenBurnerRenderer implements BlockEntityRenderer<BunsenBurnerTil
         // Set the liquid level based on the entities level
         /*
          * Switch statement doesnt seem to work here, so have to use a long loqor-like if statement.
-        switch (pBlockEntity.getLiquidLevel()) {
+        switch (pBlockEntity.getLiquidLevel()) {k
             default:
                 // dont do shit
             case 1:
@@ -90,17 +79,18 @@ public class BunsenBurnerRenderer implements BlockEntityRenderer<BunsenBurnerTil
          */
 
         // * Get the block and its liquid level
-        Block block = pBlockEntity.getBlockState().getBlock();
-        int liquidLevel = ((BunsenBurnerBlock) block).getLiquidLevel();
+        // * * We know that rendering is always done on client, so the server needs to send us this data.
+        this.liquidLevel = pBlockEntity.liquidLevel;
+        this.hasCandle = pBlockEntity.hasCandle();
 
         if (liquidLevel == 1) {this.model.one.visible = true;}
-        if (liquidLevel == 2) {this.model.two.visible = true;}
-        if (liquidLevel == 3) {this.model.three.visible = true;}
-        if (liquidLevel == 4) {this.model.four.visible = true;}
-        if (liquidLevel == 5) {this.model.five.visible = true;}
-        if (liquidLevel == 6) {this.model.six.visible = true;}
-        if (liquidLevel == 7) {this.model.seven.visible = true;}
-        this.model.candle.visible = ((BunsenBurnerBlock) block).doesItHaveCandle();
+        else if (liquidLevel == 2) {this.model.two.visible = true;}
+        else if (liquidLevel == 3) {this.model.three.visible = true;}
+        else if (liquidLevel == 4) {this.model.four.visible = true;}
+        else if (liquidLevel == 5) {this.model.five.visible = true;}
+        else if (liquidLevel == 6) {this.model.six.visible = true;}
+        else if (liquidLevel == 7) {this.model.seven.visible = true;}
+        this.model.candle.visible = this.hasCandle;
 
         this.model.render(pPoseStack, pBufferSource.getBuffer(RenderType.entitySmoothCutout(BUNSEN_BURNER)),
                 getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
@@ -112,6 +102,7 @@ public class BunsenBurnerRenderer implements BlockEntityRenderer<BunsenBurnerTil
         int sLight = level.getBrightness(LightLayer.SKY, pos);
         return LightTexture.pack(bLight, sLight);
     }
+
 
 
 }
