@@ -100,9 +100,9 @@ public class BunsenBurnerRenderer implements BlockEntityRenderer<BunsenBurnerTil
         if (liquidLevel == 5) {this.model.five.visible = true;}
         if (liquidLevel == 6) {this.model.six.visible = true;}
         if (liquidLevel == 7) {this.model.seven.visible = true;}
+        this.model.candle.visible = ((BunsenBurnerBlock) block).doesItHaveCandle();
 
-
-        this.model.render(pPoseStack, pBufferSource.getBuffer(RenderType.entityCutout(BUNSEN_BURNER)),
+        this.model.render(pPoseStack, pBufferSource.getBuffer(RenderType.entitySmoothCutout(BUNSEN_BURNER)),
                 getLightLevel(pBlockEntity.getLevel(), pBlockEntity.getBlockPos()), OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
         pPoseStack.popPose();
     }

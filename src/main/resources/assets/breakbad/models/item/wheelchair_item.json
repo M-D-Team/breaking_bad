@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "breakbad:item/bunsen_burner"
+    "layer0": "breakbad:item/wheelchair_item"
   }
 }

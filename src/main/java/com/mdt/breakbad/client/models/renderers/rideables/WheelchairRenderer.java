@@ -13,14 +13,15 @@ import net.minecraft.resources.ResourceLocation;
 
 public class WheelchairRenderer extends MobRenderer<WheelchairEntity, WheelchairModel<WheelchairEntity>> {
     public static final ResourceLocation TEXTURE = new ResourceLocation(BreakBad.MODID, "textures/entities/rideables/wheelchair.png");
+
     public WheelchairRenderer(EntityRendererProvider.Context context) {
         super(context, new WheelchairModel<>(context.bakeLayer(WheelchairModel.LAYER_LOCATION)), 0.5f);
+        this.model = new WheelchairModel(context.bakeLayer(WheelchairModel.LAYER_LOCATION));
     }
 
-
     @Override
-    public void render(WheelchairEntity p_115308_, float p_115309_, float p_115310_, PoseStack p_115311_, MultiBufferSource p_115312_, int p_115313_) {
-        super.render(p_115308_, p_115309_, p_115310_, p_115311_, p_115312_, p_115313_);
+    public void render(WheelchairEntity p_115455_, float p_115456_, float p_115457_, PoseStack p_115458_, MultiBufferSource p_115459_, int p_115460_) {
+        super.render(p_115455_, p_115456_, p_115457_, p_115458_, p_115459_, p_115460_);
     }
 
     @Override

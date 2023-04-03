@@ -14,7 +14,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -26,7 +28,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class BunsenBurnerBlock extends BaseEntityBlock {
+public class CondenserBlock extends BaseEntityBlock {
 
     protected final ParticleOptions flameParticle;
     public int liquidLevel = 0;
@@ -34,18 +36,13 @@ public class BunsenBurnerBlock extends BaseEntityBlock {
     public boolean hasCandle = false;
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     private static final VoxelShape SHAPE = Block.box(4, 0, 4, 12, 20, 12);
-    public BunsenBurnerBlock(Properties p_49795_, ParticleOptions pO) {
+    public CondenserBlock(Properties p_49795_, ParticleOptions pO) {
         super(p_49795_);
         this.flameParticle = pO;
     }
 
     public int getLiquidLevel() {
         return this.liquidLevel;
-    }
-
-    public void updateLiquidLevel() {
-        this.liquidLevel++;
-        if (this.liquidLevel > 7) {this.liquidLevel = 0;}
     }
 
     public boolean isCandleLit() {
@@ -56,11 +53,16 @@ public class BunsenBurnerBlock extends BaseEntityBlock {
         return this.hasCandle;
     }
 
+    public void updateLiquidLevel() {
+        this.liquidLevel++;
+        if (this.liquidLevel > 6) {this.liquidLevel = 0;}
+    }
+
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos blockPos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!level.isClientSide && hand == InteractionHand.MAIN_HAND) {
             BlockEntity blockEntity = level.getBlockEntity(blockPos);
-            if (blockEntity instanceof BunsenBurnerTile) {
+            if (blockEntity instanceof CondenserTile) {
                 if(player.getMainHandItem().isEmpty()) {
                     this.updateLiquidLevel();
                 } else if (player.getMainHandItem().getItem() == Items.FLINT_AND_STEEL && this.doesItHaveCandle()) {
@@ -87,16 +89,16 @@ public class BunsenBurnerBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide() ? null : ($0, $1, $2, blockEntity) -> {
-            if(blockEntity instanceof BunsenBurnerTile) {
-                BunsenBurnerTile burner = (BunsenBurnerTile) blockEntity;
-                burner.tick();
+            if(blockEntity instanceof CondenserTile) {
+                CondenserTile condenser = (CondenserTile) blockEntity;
+                condenser.tick();
             }
         };
     }
 
     @Override
     public BlockEntity newBlockEntity(BlockPos p_153215_, BlockState p_153216_) {
-        return BreakBadTiles.BUNSEN_BURNER_TILE.get().create(p_153215_, p_153216_);
+        return BreakBadTiles.CONDENSER_TILE.get().create(p_153215_, p_153216_);
     }
 
     @Override

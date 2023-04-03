@@ -2,6 +2,7 @@ package com.mdt.breakbad.core.init;
 
 import com.mdt.breakbad.BreakBad;
 import com.mdt.breakbad.common.blocks.BunsenBurnerBlock;
+import com.mdt.breakbad.common.blocks.CondenserBlock;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.BlockItem;
@@ -23,7 +24,8 @@ public class BreakBadBlocks {
             new BarrelBlock(BlockBehaviour.Properties.of(Material.METAL).strength(2F,3F).requiresCorrectToolForDrops()), new Item.Properties());
     public static final RegistryObject<BunsenBurnerBlock> BUNSEN_BURNER = register("bunsen_burner",() ->
             new BunsenBurnerBlock(BlockBehaviour.Properties.of(Material.METAL).strength(2F,3F), ParticleTypes.FLAME), new Item.Properties());
-
+    public static final RegistryObject<CondenserBlock> CONDENSER = register("condenser",() ->
+            new CondenserBlock(BlockBehaviour.Properties.of(Material.METAL).strength(2F,3F), ParticleTypes.FLAME), new Item.Properties());
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> supplier, Item.Properties properties ){
         RegistryObject<T> block = BLOCKS.register(name, supplier);

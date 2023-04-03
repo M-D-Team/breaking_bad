@@ -61,9 +61,7 @@ public class WheelchairModel<T extends WheelchairEntity> extends EntityModel<T> 
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.body.getChild("bell").visible = entity.hasBell();
 		this.body.getChild("tnt").visible = entity.hasTNT();
-		if(entity.getDeltaMovement().x() > 0 || entity.getDeltaMovement().z() > 0) {
-			this.body.getChild("wheels").xRot = ageInTicks / 12;
-		}
+		this.body.getChild("wheels").xRot = limbSwing / 12;
 	}
 
 	@Override

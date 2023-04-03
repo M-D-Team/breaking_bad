@@ -14,5 +14,8 @@
   "effect.breakbad.seaweed": "Give it that little more blue.",
   "effect.breakbad.pure_compound": "The purest of potions.",
   "key.category.mdt.breakbad": "Breaking Craft",
-  "key.mdt.ring_bell": "Ring Bell"
+  "key.mdt.ring_bell": "Ring Bell",
+  "item.breakbad.wheelchair_item": "Hector Salamanca's Wheelchair",
+  "block.breakbad.bunsen_burner": "Bunsen Burner",
+  "block.breakbad.condenser": "Condenser"
 }

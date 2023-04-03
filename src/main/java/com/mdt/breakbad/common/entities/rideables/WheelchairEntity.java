@@ -1,9 +1,13 @@
 package com.mdt.breakbad.common.entities.rideables;
 
+import com.mdt.breakbad.common.entities.HumanoidEntity;
+import com.mdt.breakbad.common.entities.humanoids.HectorEntity;
+import com.mdt.breakbad.core.init.BreakBadItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -13,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
 
@@ -132,6 +137,14 @@ public class WheelchairEntity extends Mob {
         }
     }
 
+    public double getMovingX() {
+        return this.getDeltaMovement().x();
+    }
+
+    public double getMovingZ() {
+        return this.getDeltaMovement().z();
+    }
+
     @Nullable
     public LivingEntity getControllingPassenger() {
         Entity entity = this.getFirstPassenger();
@@ -146,13 +159,23 @@ public class WheelchairEntity extends Mob {
         return (float)this.getAttributeValue(Attributes.MOVEMENT_SPEED);
     }
 
+    @Override
+    protected void dropCustomDeathLoot(DamageSource pSource, int pLooting, boolean pRecentlyHit) {
+        super.dropCustomDeathLoot(pSource, pLooting, pRecentlyHit);
+        this.spawnAtLocation(BreakBadItems.WHEELCHAIR_ITEM.get());
+    }
+
     public void positionRider(Entity entity) {
         super.positionRider(entity);
         float f = Mth.sin(this.yBodyRot * ((float) Math.PI / 180F));
         float f1 = Mth.cos(this.yBodyRot * ((float) Math.PI / 180F));
         float f2 = 0.1F;
         float f3 = 0.0F;
-        entity.setPos(this.getX() + (double) (0.1F * f), this.getY(0.25D) + entity.getMyRidingOffset() + 0.0D, this.getZ() - (double) (0.1F * f1));
+        if(entity instanceof HumanoidEntity) {
+            entity.setPos(this.getX() + (double) (0.1F * f), this.getY(-0.05D) + entity.getMyRidingOffset() + 0.0D, this.getZ() - (double) (0.1F * f1));
+        } else {
+            entity.setPos(this.getX() + (double) (0.1F * f), this.getY(0.25D) + entity.getMyRidingOffset() + 0.0D, this.getZ() - (double) (0.1F * f1));
+        }
         if (entity instanceof LivingEntity) {
             ((LivingEntity) entity).yBodyRot = this.yBodyRot;
         }

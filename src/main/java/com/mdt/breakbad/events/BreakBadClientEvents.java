@@ -6,7 +6,9 @@ import com.mdt.breakbad.client.models.entities.rideables.WheelchairModel;
 import com.mdt.breakbad.client.models.renderers.HumanoidEntityRenderer;
 import com.mdt.breakbad.client.models.renderers.rideables.WheelchairRenderer;
 import com.mdt.breakbad.client.models.renderers.tileentities.BunsenBurnerRenderer;
+import com.mdt.breakbad.client.models.renderers.tileentities.CondenserRenderer;
 import com.mdt.breakbad.client.models.tileentities.BunsenBurner;
+import com.mdt.breakbad.client.models.tileentities.CondenserAndPhaseShifter;
 import com.mdt.breakbad.common.entities.rideables.WheelchairEntity;
 import com.mdt.breakbad.core.init.BreakBadEntities;
 import com.mdt.breakbad.core.init.BreakBadTiles;
@@ -50,6 +52,7 @@ public class BreakBadClientEvents {
 
         //Block entities
         renderers.registerBlockEntityRenderer(BreakBadTiles.BUNSEN_BURNER_TILE.get(), BunsenBurnerRenderer::new);
+        renderers.registerBlockEntityRenderer(BreakBadTiles.CONDENSER_TILE.get(), CondenserRenderer::new);
     }
 
     @Mod.EventBusSubscriber(modid = BreakBad.MODID, value = Dist.CLIENT)
@@ -83,6 +86,7 @@ public class BreakBadClientEvents {
     public static void registerLayerDefinition(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(WheelchairModel.LAYER_LOCATION, WheelchairModel::createBodyLayer);
         event.registerLayerDefinition(BunsenBurner.LAYER_LOCATION, BunsenBurner::createBodyLayer);
+        event.registerLayerDefinition(CondenserAndPhaseShifter.LAYER_LOCATION, CondenserAndPhaseShifter::createBodyLayer);
         event.registerLayerDefinition(HumanoidEntityModel.LAYER_LOCATION,() -> LayerDefinition.create(PlayerModel.createMesh(CubeDeformation.NONE,true),64,64));
     }
 }

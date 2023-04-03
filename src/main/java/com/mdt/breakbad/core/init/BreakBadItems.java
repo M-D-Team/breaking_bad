@@ -1,6 +1,7 @@
 package com.mdt.breakbad.core.init;
 
 import com.mdt.breakbad.common.BreakBadArmourMaterials;
+import com.mdt.breakbad.common.items.CustomSpawnItem;
 import com.mdt.breakbad.common.items.FulminateItem;
 import com.mdt.breakbad.common.items.MethItem;
 import com.mdt.breakbad.common.items.WearableItem;
@@ -9,6 +10,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.BreedGoal;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
@@ -45,4 +47,5 @@ public class BreakBadItems {
     public static final RegistryObject<Item> CURLY_FRIES = ITEMS.register("curly_fries", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1f).build())));
     public static final RegistryObject<Item> FULMINATE = ITEMS.register("fulminate", () -> new FulminateItem(new Item.Properties()));
     public static final RegistryObject<Item> GAS_MASK = ITEMS.register("gas_mask", () -> new WearableItem(BreakBadArmourMaterials.GAS_MASK, EquipmentSlot.HEAD,new Item.Properties()));
+    public static final RegistryObject<Item> WHEELCHAIR_ITEM = ITEMS.register("wheelchair_item", () -> new CustomSpawnItem(new Item.Properties()));
 }
