@@ -5,7 +5,6 @@ import com.mdt.breakbad.core.init.BreakBadItems;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -66,7 +65,7 @@ public class Fulminate extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult hitResult) {
         super.onHitEntity(hitResult);
         Entity entity = hitResult.getEntity();
-        entity.hurt(DamageSource.thrown(this, this.getOwner()), (float)0);
+        entity.hurt(this.damageSources().thrown(this, this.getOwner()), (float)0);
         explode(this);
     }
 

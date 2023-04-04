@@ -1,23 +1,21 @@
 package com.mdt.breakbad;
 
-import com.mdt.breakbad.client.models.renderers.tileentities.BunsenBurnerRenderer;
 import com.mdt.breakbad.core.init.*;
 import com.mdt.breakbad.networking.Network;
 import com.mdt.breakbad.util.BetterBrewingRecipe;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.BookModel;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -69,7 +67,7 @@ public class BreakBad
         BREAKBAD_TAB = event.registerCreativeModeTab(new ResourceLocation(MODID, "breakbad_tab"), builder -> builder
                 .icon(() -> new ItemStack(BreakBadItems.METH.get()))
                 .title(Component.translatable("tabs.breakbad.breakbad_tab"))
-                .displayItems((featureFlags, output, hasOp) -> {
+                .displayItems((featureFlags, output) -> {
                     // Add all the items in BreakBadItems
                     for (RegistryObject<Item> item : BreakBadItems.ITEMS.getEntries()) {
                         output.accept(item.get());

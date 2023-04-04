@@ -128,8 +128,7 @@ public class WheelchairEntity extends Mob {
                 if (f1 <= 0.0F) {
                     f1 *= 0.25F;
                 }
-
-                this.flyingSpeed = this.getSpeed() * 0.1F;
+                
                 if (this.isControlledByLocalInstance()) {
                     this.setSpeed(this.getDrivenMovementSpeed(livingentity));
                     super.travel(new Vec3((double)f, p_30633_.y, (double)f1));
@@ -137,10 +136,9 @@ public class WheelchairEntity extends Mob {
                     this.setDeltaMovement(this.getX() - this.xOld, this.getY() - this.yOld, this.getZ() - this.zOld);
                 }
 
-                this.calculateEntityAnimation(this, false);
+                this.calculateEntityAnimation( false);
                 this.tryCheckInsideBlocks();
             } else {
-                this.flyingSpeed = 0.02F;
                 super.travel(p_30633_);
             }
         }
